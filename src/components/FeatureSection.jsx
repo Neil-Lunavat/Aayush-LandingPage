@@ -1,4 +1,5 @@
 import { features } from "../constants";
+import { MoveDown } from "lucide-react";
 
 const FeatureSection = () => {
     return (
@@ -8,10 +9,10 @@ const FeatureSection = () => {
         >
             <div className="text-center">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">
-                    Easily build{" "}
                     <span className="bg-gradient-to-r from-orange-500 to-orange-800 text-transparent bg-clip-text">
-                        stock market portfolio
-                    </span>
+                        Services
+                    </span>{" "}
+                    we provide
                 </h2>
             </div>
             <div className="flex flex-wrap mt-10 lg:mt-20">
@@ -25,7 +26,7 @@ const FeatureSection = () => {
                                 <h5 className="mt-1 mb-6 text-xl">
                                     {feature.text}
                                 </h5>
-                                <p className="text-md p-2 mb-20 text-neutral-500">
+                                <p className="text-md p-2 mb-20 text-neutral-400">
                                     {feature.description}
                                 </p>
                             </div>

@@ -14,8 +14,8 @@ import user5 from "../assets/profile-pictures/user5.jpg";
 import user6 from "../assets/profile-pictures/user6.jpg";
 
 export const navItems = [
-    { label: "Features", id: "features" },
-    { label: "Workflow", id: "workflow" },
+    { label: "Services", id: "features" },
+    { label: "Benefits", id: "workflow" },
     { label: "Pricing", id: "pricing" },
     { label: "Testimonials", id: "testimonials" },
     { label: "Contact Us", id: "bookingform" },
@@ -63,62 +63,62 @@ export const testimonials = [
 export const features = [
     {
         icon: <BarChart3 />,
-        text: "Portfolio Management",
+        text: "One-on-One Financial Coaching",
         description:
-            "Easily build and manage your stock market portfolio with a user-friendly interface.",
+            "Customized financial planning sessions based on individual financial goals.",
     },
     {
         icon: <Phone />,
-        text: "Multi-Platform Compatibility",
+        text: "Investment Portfolio Analysis",
         description:
-            "Access your stock portfolio seamlessly across multiple platforms, including mobile, desktop, and web.",
+            "Detailed review of existing investments and personalized recommendations.",
     },
     {
         icon: <LayoutTemplate />,
-        text: "Pre-Built Investment Templates",
+        text: "Free Workshops & Webinars",
         description:
-            "Jumpstart your investment strategy with a variety of built-in portfolio templates tailored for different risk levels.",
+            "Monthly and quarterly financial literacy sessions covering key topics such as budgeting, investing, and retirement planning.",
     },
     {
         icon: <RefreshCw />,
-        text: "Real-Time Market Data",
+        text: "Online Courses",
         description:
-            "Stay updated with real-time stock prices, trends, and market movements to make informed investment decisions.",
+            "Self-paced financial education modules on investment strategies, tax planning, and wealth building.",
     },
     {
         icon: <Users />,
-        text: "Collaboration Tools",
+        text: "Retirement & Tax Planning Consultation",
         description:
-            "Work with financial advisors or team members in real-time to refine your investment strategies.",
+            "Expert guidance on tax-efficient investing and retirement savings strategies.",
     },
     {
         icon: <BarChart />,
-        text: "Analytics Dashboard",
+        text: "Personalized Investment Strategies",
         description:
-            "Gain valuable insights into your portfolio's performance with an integrated analytics dashboard tracking key metrics.",
+            "Asset allocation and portfolio diversification based on risk appetite and financial aspirations.",
     },
 ];
 
 export const checklistItems = [
     {
-        title: "Personalized Learning Plans",
+        title: "Achieve Financial Independence",
         description:
-            "Get a customized roadmap tailored to your financial knowledge and goals, ensuring effective and structured learning.",
+            "Learn how to manage, grow, and multiply your wealth, setting yourself up for long-term financial freedom.",
     },
     {
-        title: "Live 1-on-1 Sessions",
+        title: "Access to Expert Knowledge at Low Cost",
         description:
-            "Engage in interactive sessions with a finance expert to clarify doubts, discuss concepts, and get real-time guidance.",
+            "More affordable than hiring a financial advisor and get a structured course with 1-on-1 guidance at a fraction of the cost.",
     },
     {
-        title: "Practical Case Studies",
+        title: "No Conflicts of Interest",
         description:
-            "Learn through real-world financial scenarios, enhancing your problem-solving skills and market understanding.",
+            "Pure education, no sales pitch—you teach them how to manage money instead of selling financial products.",
     },
     {
-        title: "Investment & Wealth Building Strategies",
+        title: "Make Smart Investment Decisions",
         description:
-            "Gain insights into smart investment techniques, portfolio management, and wealth accumulation strategies.",
+            "Gain the knowledge to confidently invest in stocks, real estate, and other assets while minimizing risks.",
     },
 ];
 

@@ -34,8 +34,8 @@ const HeroSection = () => {
                 </span>
             </h1>
             <p className="mt-10 text-lg text-center text-neutral-500 max-w-4xl">
-                Random financial info text that is related to work and shit. Bla
-                bla bla bla bla bla bla bla
+                Personalized financial coaching and investment strategies
+                tailored for your success. Take control of your finances today.
             </p>
             <div className="flex justify-center my-10">
                 <button
@@ -46,26 +46,6 @@ const HeroSection = () => {
                     <span className="absolute inset-0 border-2 border-transparent rounded-md group-hover:border-orange-500 group-hover:border-gradient-to-r group-hover:from-orange-500 group-hover:to-orange-800 transition-all duration-300"></span>
                     <span className="relative z-10">Book a free call</span>
                 </button>
-            </div>
-            <div className="flex mt-10 justify-center">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 mx-2 my-4 hover:scale-[102%] duration-200"
-                >
-                    <source src={video1} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 mx-2 my-4 hover:scale-[102%] duration-200"
-                >
-                    <source src={video2} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
             </div>
         </div>
     );

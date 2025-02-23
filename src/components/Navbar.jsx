@@ -60,7 +60,7 @@ const Navbar = () => {
                                 onClick={() => scrollToTop()}
                                 className="text-xl tracking-tight hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
                             >
-                                Aayush
+                                More Wealth Creation
                             </button>
                         </div>
 
@@ -106,37 +106,41 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Navigation Drawer */}
-                    <div
-                        className={`fixed right-0 top-0 w-full bg-neutral-900 transform transition-all duration-300 ease-in-out ${
-                            mobileDrawerOpen
-                                ? "translate-y-16 opacity-100"
-                                : "-translate-y-full opacity-0"
-                        }`}
-                    >
-                        <ul className="p-12 flex flex-col items-center space-y-8">
-                            {navItems.map((item, index) => (
-                                <li
-                                    key={index}
-                                    className="relative group w-full text-center"
-                                >
-                                    <button
-                                        onClick={() => scrollToSection(item.id)}
-                                        className="py-2 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
+                    {mobileDrawerOpen && (
+                        <div
+                            className={`fixed right-0 top-0 w-full bg-neutral-900 transform transition-all  duration-300 ease-in-out ${
+                                mobileDrawerOpen
+                                    ? "translate-y-16 opacity-100"
+                                    : ""
+                            }`}
+                        >
+                            <ul className="p-12 flex flex-col items-center space-y-8">
+                                {navItems.map((item, index) => (
+                                    <li
+                                        key={index}
+                                        className="relative group w-full text-center"
                                     >
-                                        {item.label}
-                                    </button>
-                                    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-800 group-hover:w-full group-hover:left-0 transition-all duration-300" />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                                        <button
+                                            onClick={() =>
+                                                scrollToSection(item.id)
+                                            }
+                                            className="py-2 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
+                                        >
+                                            {item.label}
+                                        </button>
+                                        <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-800 group-hover:w-full group-hover:left-0 transition-all duration-300" />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </nav>
 
             {/* Scroll to Top Button */}
             <button
                 onClick={scrollToTop}
-                className={`fixed bottom-8 right-8 p-4 rounded-full shadow-xl transition-all duration-300 backdrop-blur-md bg-white/20 border-2 border-transparent ${
+                className={`z-40 fixed bottom-8 right-8 p-4 rounded-full shadow-xl transition-all duration-300 backdrop-blur-md bg-white/20 border-2 border-transparent ${
                     showScrollTop
                         ? "translate-y-0 opacity-100"
                         : "translate-y-20 opacity-0"
