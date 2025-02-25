@@ -92,7 +92,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Dropdown */}
                     <div
-                        className={`lg:hidden absolute left-0 right-0 bg-neutral-900 backdrop-blur-lg border-b border-neutral-700/80 rounded-b-2xl overflow-hidden transition-all duration-300 ${
+                        className={`lg:hidden absolute  left-0 right-0 bg-neutral-900 backdrop-blur-lg border-b border-neutral-700/0 rounded-b-2xl overflow-hidden transition-all duration-300 ${
                             mobileDrawerOpen ? "max-h-[400px]" : "max-h-0"
                         }`}
                     >
