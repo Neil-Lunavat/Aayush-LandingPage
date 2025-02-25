@@ -113,7 +113,7 @@ export const checklistItems = [
     {
         title: "No Conflicts of Interest",
         description:
-            "Pure education, no sales pitch—you teach them how to manage money instead of selling financial products.",
+            "Pure education, no sales pitch—I teach you how to manage money effectively instead of selling financial products.",
     },
     {
         title: "Make Smart Investment Decisions",

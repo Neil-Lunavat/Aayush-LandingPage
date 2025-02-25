@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png";
 import { navItems } from "../constants";
 import React, { useState, useEffect } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Menu, X } from "lucide-react";
 
 const Navbar = () => {
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -12,36 +12,32 @@ const Navbar = () => {
         const handleScroll = () => {
             setShowScrollTop(window.scrollY > 200);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Disable body scroll when mobile menu is open
+    useEffect(() => {
+        document.body.style.overflow = mobileDrawerOpen ? "hidden" : "auto";
+    }, [mobileDrawerOpen]);
 
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
             const navbarHeight = document.querySelector("nav").offsetHeight;
-            const additionalOffset = 48; // Add extra padding from the navbar
-            const elementPosition = element.getBoundingClientRect().top;
             const offsetPosition =
-                elementPosition +
+                element.getBoundingClientRect().top +
                 window.scrollY -
                 navbarHeight -
-                additionalOffset;
+                48;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-            });
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             setMobileDrawerOpen(false);
         }
     };
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
         setShowScrollTop(false);
     };
 
@@ -57,8 +53,8 @@ const Navbar = () => {
                                 alt="Logo"
                             />
                             <button
-                                onClick={() => scrollToTop()}
-                                className="text-xl tracking-tight hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
+                                onClick={scrollToTop}
+                                className="text-xl tracking-tight text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
                             >
                                 More Wealth Creation
                             </button>
@@ -70,7 +66,7 @@ const Navbar = () => {
                                 <li key={index} className="relative group">
                                     <button
                                         onClick={() => scrollToSection(item.id)}
-                                        className={`py-2 text-white hover:text-orange-500 transition-all duration-300`}
+                                        className="py-2 text-white hover:text-orange-500 transition-all duration-300"
                                     >
                                         {item.label}
                                     </button>
@@ -79,68 +75,58 @@ const Navbar = () => {
                             ))}
                         </ul>
 
-                        {/* Hamburger Menu */}
-                        <div className="lg:hidden">
-                            <button
-                                onClick={() =>
-                                    setMobileDrawerOpen(!mobileDrawerOpen)
-                                }
-                                className="relative w-6 h-6 focus:outline-none"
-                            >
-                                <span
-                                    className={`absolute left-0 top-1/2 w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                                        mobileDrawerOpen
-                                            ? "rotate-45 translate-y-0"
-                                            : "-translate-y-1"
-                                    }`}
-                                />
-                                <span
-                                    className={`absolute left-0 top-1/2 w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                                        mobileDrawerOpen
-                                            ? "-rotate-45 translate-y-0"
-                                            : "translate-y-1"
-                                    }`}
-                                />
-                            </button>
-                        </div>
+                        {/* Hamburger Menu for Mobile */}
+                        <button
+                            className="lg:hidden"
+                            onClick={() =>
+                                setMobileDrawerOpen(!mobileDrawerOpen)
+                            }
+                        >
+                            {mobileDrawerOpen ? (
+                                <X className="w-6 h-6 text-white" />
+                            ) : (
+                                <Menu className="w-6 h-6 text-white" />
+                            )}
+                        </button>
                     </div>
 
-                    {/* Mobile Navigation Drawer */}
-                    {mobileDrawerOpen && (
-                        <div
-                            className={`fixed right-0 top-0 w-full bg-neutral-900 transform transition-all  duration-300 ease-in-out ${
-                                mobileDrawerOpen
-                                    ? "translate-y-16 opacity-100"
-                                    : ""
-                            }`}
-                        >
-                            <ul className="p-12 flex flex-col items-center space-y-8">
-                                {navItems.map((item, index) => (
-                                    <li
-                                        key={index}
-                                        className="relative group w-full text-center"
-                                    >
-                                        <button
-                                            onClick={() =>
-                                                scrollToSection(item.id)
-                                            }
-                                            className="py-2 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-800 hover:text-transparent hover:bg-clip-text transition-all duration-300"
-                                        >
-                                            {item.label}
-                                        </button>
-                                        <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-800 group-hover:w-full group-hover:left-0 transition-all duration-300" />
-                                    </li>
-                                ))}
-                            </ul>
+                    {/* Mobile Menu Dropdown */}
+                    <div
+                        className={`lg:hidden absolute left-0 right-0 bg-neutral-900 backdrop-blur-lg border-b border-neutral-700/80 rounded-b-2xl overflow-hidden transition-all duration-300 ${
+                            mobileDrawerOpen ? "max-h-[400px]" : "max-h-0"
+                        }`}
+                    >
+                        <div className="flex flex-col p-4">
+                            {navItems.map((item, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => scrollToSection(item.id)}
+                                    className="w-full text-left py-3 px-4 text-white hover:border-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-800 hover:text-transparent hover:bg-clip-text border-2 border-transparent rounded-md transition-all duration-300"
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
                         </div>
-                    )}
+                    </div>
                 </div>
             </nav>
+
+            {/* Overlay for Mobile Menu */}
+            <div
+                className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+                    mobileDrawerOpen
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                }`}
+                onClick={() => setMobileDrawerOpen(false)}
+            >
+                <div className="absolute inset-0 bg-black/50" />
+            </div>
 
             {/* Scroll to Top Button */}
             <button
                 onClick={scrollToTop}
-                className={`z-40 fixed bottom-8 right-8 p-4 rounded-full shadow-xl transition-all duration-300 backdrop-blur-md bg-white/20 border-2 border-transparent ${
+                className={`z-40 fixed bottom-8 right-8 p-4 rounded-full shadow-xl transition-all duration-300 backdrop-blur-md bg-white/20 ${
                     showScrollTop
                         ? "translate-y-0 opacity-100"
                         : "translate-y-20 opacity-0"
