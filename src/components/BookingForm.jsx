@@ -9,6 +9,9 @@ const BookingForm = () => {
         email: "",
         date: "",
         time: "",
+        hour: "",
+        minute: "",
+        period: "",
         message: "",
     });
     const [loading, setLoading] = useState(false);
@@ -17,29 +20,22 @@ const BookingForm = () => {
     // Get current timezone for display
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    // Generate available time slots (9 AM to 5 PM)
-    const generateTimeSlots = () => {
-        const slots = [];
-        for (let hour = 9; hour <= 17; hour++) {
-            const ampm = hour >= 12 ? "PM" : "AM";
-            const hour12 = hour > 12 ? hour - 12 : hour;
-            const timeString = `${hour12}:00 ${ampm}`;
-            slots.push(timeString);
-        }
-        return slots;
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "date") {
-            // Check if selected date is a weekend
-            const selectedDate = new Date(value);
-            const day = selectedDate.getDay();
-            if (day === 0 || day === 6) {
-                return; // Don't update if weekend
+        setFormData((prev) => ({ ...prev, [name]: value }));
+
+        // If this is one of the time components, also update the combined time value
+        if (name === "hour" || name === "minute" || name === "period") {
+            const hour = name === "hour" ? value : formData.hour || "";
+            const minute = name === "minute" ? value : formData.minute || "";
+            const period = name === "period" ? value : formData.period || "";
+
+            // Only update the combined time if all components are present
+            if (hour && minute && period) {
+                const timeString = `${hour}:${minute} ${period}`;
+                setFormData((prev) => ({ ...prev, time: timeString }));
             }
         }
-        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e) => {
@@ -75,6 +71,9 @@ const BookingForm = () => {
                     email: "",
                     date: "",
                     time: "",
+                    hour: "",
+                    minute: "",
+                    period: "",
                     message: "",
                 });
             })
@@ -94,27 +93,10 @@ const BookingForm = () => {
     // Get today's date and format it for min date attribute
     const today = new Date().toISOString().split("T")[0];
 
-    // Generate the maxDate (e.g., 3 months from now)
+    // Generate the maxDate (e.g., 1 months from now)
     const maxDate = new Date();
-    maxDate.setMonth(maxDate.getMonth() + 3);
+    maxDate.setMonth(maxDate.getMonth() + 1);
     const maxDateStr = maxDate.toISOString().split("T")[0];
-
-    // Function to determine which dates should be disabled
-    const getDisabledDates = () => {
-        let dates = [];
-        let current = new Date(today);
-        let end = new Date(maxDateStr);
-
-        while (current <= end) {
-            if (current.getDay() === 0 || current.getDay() === 6) {
-                dates.push(new Date(current).toISOString().split("T")[0]);
-            }
-            current.setDate(current.getDate() + 1);
-        }
-        return dates;
-    };
-
-    const disabledDates = getDisabledDates();
 
     return (
         <div
@@ -193,7 +175,7 @@ const BookingForm = () => {
                     </div>
 
                     {/* Date and Time Selection */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="relative group">
                             <input
                                 type="date"
@@ -203,39 +185,75 @@ const BookingForm = () => {
                                 min={today}
                                 max={maxDateStr}
                                 className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-lg px-4 py-3 text-white 
-                                         focus:outline-none focus:border-orange-500 transition-colors duration-300
-                                         group-hover:border-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                     focus:outline-none focus:border-orange-500 transition-colors duration-300
+                     group-hover:border-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
                                 required
                                 onKeyDown={(e) => e.preventDefault()}
                             />
                             <label
                                 className="absolute left-4 -top-3 bg-neutral-900 px-2 text-sm text-neutral-400 
-                                            group-hover:text-orange-500 transition-colors duration-300"
+                        group-hover:text-orange-500 transition-colors duration-300"
                             >
-                                Preferred Date (Weekdays Only)
+                                Preferred Date
                             </label>
                         </div>
 
-                        <div className="relative group">
-                            <select
-                                name="time"
-                                value={formData.time}
-                                onChange={handleChange}
-                                className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-lg px-4 py-3 text-white 
-                                         focus:outline-none focus:border-orange-500 transition-colors duration-300
-                                         group-hover:border-orange-600"
-                                required
-                            >
-                                <option value="">Select a time</option>
-                                {generateTimeSlots().map((time) => (
-                                    <option key={time} value={time}>
-                                        {time} ({timeZone})
+                        <div className="relative group col-span-2">
+                            <div className="flex items-center gap-4">
+                                <select
+                                    name="hour"
+                                    value={formData.hour}
+                                    onChange={handleChange}
+                                    className="w-1/3 bg-neutral-900 border-2 border-neutral-700 rounded-lg px-4 py-3 text-white 
+                         focus:outline-none focus:border-orange-500 transition-colors duration-300
+                         group-hover:border-orange-600"
+                                    required
+                                >
+                                    <option value="" disabled>
+                                        Hour
                                     </option>
-                                ))}
-                            </select>
+                                    {[...Array(12)].map((_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                <select
+                                    name="minute"
+                                    value={formData.minute}
+                                    onChange={handleChange}
+                                    className="w-1/3 bg-neutral-900 border-2 border-neutral-700 rounded-lg px-4 py-3 text-white 
+                         focus:outline-none focus:border-orange-500 transition-colors duration-300
+                         group-hover:border-orange-600"
+                                    required
+                                >
+                                    <option value="" disabled>
+                                        Minute
+                                    </option>
+                                    <option value="00">00</option>
+                                    <option value="30">30</option>
+                                </select>
+
+                                <select
+                                    name="period"
+                                    value={formData.period}
+                                    onChange={handleChange}
+                                    className="w-1/3 bg-neutral-900 border-2 border-neutral-700 rounded-lg px-4 py-3 text-white 
+                         focus:outline-none focus:border-orange-500 transition-colors duration-300
+                         group-hover:border-orange-600"
+                                    required
+                                >
+                                    <option value="" disabled>
+                                        AM/PM
+                                    </option>
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
                             <label
                                 className="absolute left-4 -top-3 bg-neutral-900 px-2 text-sm text-neutral-400 
-                                            group-hover:text-orange-500 transition-colors duration-300"
+                        group-hover:text-orange-500 transition-colors duration-300"
                             >
                                 Preferred Time
                             </label>
