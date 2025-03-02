@@ -1,10 +1,10 @@
 import {
-    BarChart3,
-    LayoutTemplate,
-    RefreshCw,
+    BarChart2,
+    Bitcoin,
+    Laptop,
+    PieChart,
+    TrendingUp,
     Users,
-    Phone,
-    BarChart,
 } from "lucide-react";
 import user1 from "../assets/profile-pictures/user1.jpg";
 import user2 from "../assets/profile-pictures/user2.jpg";
@@ -62,40 +62,40 @@ export const testimonials = [
 
 export const features = [
     {
-        icon: <BarChart3 />,
+        icon: <TrendingUp />,
         text: "One-on-One Financial Coaching",
         description:
-            "Customized financial planning sessions based on individual financial goals.",
+            "Customised financial planning sessions tailored to individual financial goals. Learn how to trade and invest in stocks, forex markets, bonds, and cryptocurrencies, understand market trends, and develop a strategy for long-term wealth building.",
     },
     {
-        icon: <Phone />,
+        icon: <PieChart />,
         text: "Investment Portfolio Analysis",
         description:
-            "Detailed review of existing investments and personalized recommendations.",
-    },
-    {
-        icon: <LayoutTemplate />,
-        text: "Free Workshops & Webinars",
-        description:
-            "Monthly and quarterly financial literacy sessions covering key topics such as budgeting, investing, and retirement planning.",
-    },
-    {
-        icon: <RefreshCw />,
-        text: "Online Courses",
-        description:
-            "Self-paced financial education modules on investment strategies, tax planning, and wealth building.",
+            "Detailed review of existing investments and personalised recommendations to optimise returns and mitigate risks.",
     },
     {
         icon: <Users />,
-        text: "Retirement & Tax Planning Consultation",
+        text: "Free Workshops & Webinars",
         description:
-            "Expert guidance on tax-efficient investing and retirement savings strategies.",
+            "Weekly and Monthly financial literacy sessions covering key topics such as budgeting, investing, and retirement planning.",
     },
     {
-        icon: <BarChart />,
-        text: "Personalized Investment Strategies",
+        icon: <Laptop />,
+        text: "Online Courses (Coming Soon)",
         description:
-            "Asset allocation and portfolio diversification based on risk appetite and financial aspirations.",
+            "Comprehensive self-paced courses on trading and investing in the stock market, forex market, and cryptocurrency market. Learn technical and fundamental analysis, risk management, and trading strategies to navigate financial markets effectively.",
+    },
+    {
+        icon: <BarChart2 />,
+        text: "Personalised Investment Strategies",
+        description:
+            "Asset allocation and portfolio diversification based on risk appetite and long-term financial goals.",
+    },
+    {
+        icon: <Bitcoin />,
+        text: "Crypto Investment & Strategy Consulting",
+        description:
+            "Understand the fundamentals of cryptocurrency investing, blockchain technology, and how digital assets can fit into a diversified investment portfolio. Get guidance on risk management and long-term crypto strategies.",
     },
 ];
 
